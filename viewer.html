@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <title>Visor 360° · Grupo B</title>
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <button id="menuBtn">← Menú</button>
+    <div class="scene-info">
+      <span id="counter">1 / 15</span>
+      <strong id="title">Escena 01</strong>
+      <small>ITSM · Grupo B</small>
+    </div>
+    <button id="fullBtn">⛶ Pantalla completa</button>
+  </div>
+
+  <div class="bottom">
+    <button id="prevBtn" class="circle">←</button>
+    <div class="hint">Arrastra con el mouse para mirar alrededor</div>
+    <button id="nextBtn" class="circle">→</button>
+  </div>
+
+  <div id="status" class="status">Cargando panorama…</div>
+
+  <!-- IMPORTANTE: A-Frame nace VISIBLE desde el primer render -->
+  <a-scene
+    id="scene"
+    embedded
+    loading-screen="enabled:false"
+    xr-mode-ui="enabled:true; XRMode: vr"
+    renderer="antialias:true; colorManagement:true"
+    background="color:#000">
+
+    <a-sky id="sky" color="#000" rotation="0 -90 0"></a-sky>
+
+    <a-camera
+      position="0 1.6 0"
+      look-controls="enabled:true; mouseEnabled:true; touchEnabled:true; pointerLockEnabled:false"
+      wasd-controls="enabled:false">
+    </a-camera>
+  </a-scene>
+
+  <script src="viewer.js"></script>
+</body>
+</html>

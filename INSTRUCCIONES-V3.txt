@@ -1,0 +1,33 @@
+CORRECCIÓN V3 - VISOR 360 EN LAPTOP Y META QUEST 2
+===================================================
+
+POR QUÉ CAMBIA:
+La versión anterior tenía A-Frame dentro de una sección que se ocultaba/mostraba.
+Esta V3 separa el visor en viewer.html, por lo que A-Frame nace visible desde
+el primer instante. En una laptop debe mostrar el panorama y permitir girarlo
+con el mouse. No se necesitan los lentes para probarlo.
+
+SUBE/REEMPLAZA EN LA RAÍZ DEL REPOSITORIO:
+- index.html          (reemplazar)
+- styles.css          (reemplazar)
+- app.js              (reemplazar)
+- viewer.html         (nuevo)
+- viewer.css          (nuevo)
+- viewer.js           (nuevo)
+
+NO CAMBIES:
+- carpeta imagenes/
+- tus foto01.jpg ... foto15.jpg
+
+DESPUÉS:
+1. Commit changes.
+2. Espera que GitHub Pages termine el deployment.
+3. Abre https://akcman.github.io/galeria360-grupo-B/
+4. Ctrl+F5.
+5. Entra a Panorama 03.
+6. Debes poder arrastrar con el mouse y mirar alrededor.
+7. Luego prueba Panorama 02.
+
+Si la imagen grande 8192x4096 diera negro pero foto03 funciona, entonces sí
+reducimos únicamente las fotos grandes. Pero primero esta prueba separa
+definitivamente el problema del visor del problema de resolución.
