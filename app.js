@@ -103,7 +103,6 @@ function showOnly(screen) {
   welcomeScreen.classList.remove("visible");
   menuScreen.classList.remove("visible");
   viewerScreen.classList.remove("visible");
-
   screen.classList.add("visible");
 }
 
@@ -138,12 +137,32 @@ function preloadImage(src) {
   });
 }
 
+/* FIX V2.1:
+   Fuerza a A-Frame/Three.js a recalcular el tamaño del canvas al mostrar
+   el visor. */
+function refreshAFrameViewport() {
+  const aframeScene = document.querySelector("a-scene");
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event("resize"));
+
+      if (aframeScene && aframeScene.renderer) {
+        const width = viewerScreen.clientWidth || window.innerWidth;
+        const height = viewerScreen.clientHeight || window.innerHeight;
+        aframeScene.renderer.setSize(width, height, false);
+      }
+    });
+  });
+}
+
 async function openScene(index) {
   currentScene = (index + scenes.length) % scenes.length;
   const scene = scenes[currentScene];
 
   showOnly(viewerScreen);
   viewerScreen.setAttribute("aria-hidden", "false");
+  refreshAFrameViewport();
   loading.classList.add("visible");
 
   sceneTitle.textContent = scene.title;
@@ -154,6 +173,9 @@ async function openScene(index) {
   try {
     await preloadImage(scene.image);
     sky.setAttribute("src", scene.image);
+
+    /* Una segunda actualización después de colocar la textura. */
+    setTimeout(refreshAFrameViewport, 100);
   } catch (error) {
     console.error("No se pudo cargar:", scene.image, error);
     sky.removeAttribute("src");
@@ -192,6 +214,7 @@ async function toggleFullscreen() {
     } else {
       await document.exitFullscreen();
     }
+    setTimeout(refreshAFrameViewport, 100);
   } catch (error) {
     console.warn("Pantalla completa no disponible:", error);
   }
@@ -215,6 +238,12 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") nextScene();
   if (event.key.toLowerCase() === "i") toggleInfo();
   if (event.key === "Escape" && !document.fullscreenElement) closeViewer();
+});
+
+window.addEventListener("resize", () => {
+  if (viewerScreen.classList.contains("visible")) {
+    refreshAFrameViewport();
+  }
 });
 
 buildMenu();
