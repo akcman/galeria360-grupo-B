@@ -1,0 +1,17 @@
+CORRECCIÓN PANTALLA NEGRA - V2.1
+
+Sustituye SOLO estos dos archivos en la raíz de tu repositorio GitHub:
+1) styles.css
+2) app.js
+
+No cambies index.html ni tus fotografías.
+
+Después:
+- espera a que GitHub Pages termine de desplegar;
+- abre la página;
+- pulsa Ctrl + F5;
+- prueba Panorama 03 primero;
+- después prueba Panorama 02.
+
+La corrección mantiene el visor A-Frame con dimensiones válidas aun cuando
+está oculto y fuerza el redimensionamiento del canvas WebGL al abrirlo.

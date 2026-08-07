@@ -1,0 +1,449 @@
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #07111f;
+  --panel: rgba(10, 24, 42, .9);
+  --panel-soft: rgba(11, 27, 48, .78);
+  --text: #f5fbff;
+  --muted: #aabed0;
+  --accent: #59d3ff;
+  --accent-soft: rgba(89, 211, 255, .15);
+  --accent-strong: #87e3ff;
+  --border: rgba(255,255,255,.10);
+  --shadow: 0 22px 70px rgba(0,0,0,.42);
+}
+
+body[data-group="b"] {
+  --accent: #63e2a6;
+  --accent-soft: rgba(99, 226, 166, .15);
+  --accent-strong: #9af2c5;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body { overflow-x: hidden; }
+button { font: inherit; }
+
+.welcome-screen,
+.screen {
+  display: none;
+  min-height: 100vh;
+}
+
+.visible { display: block; }
+
+.welcome-screen {
+  background:
+    radial-gradient(circle at 20% 10%, var(--accent-soft), transparent 32%),
+    radial-gradient(circle at 90% 0%, rgba(75,122,215,.18), transparent 28%),
+    linear-gradient(180deg, #0a1728 0%, #06101d 100%);
+  padding: 24px;
+}
+
+.welcome-card {
+  width: min(920px, 100%);
+  min-height: calc(100vh - 48px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 44px 28px;
+}
+
+.institution {
+  color: #d7e6f2;
+  font-size: clamp(15px, 2vw, 20px);
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.eyebrow {
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  margin-top: 18px;
+}
+
+.welcome-card h1 {
+  margin: 14px 0 4px;
+  font-size: clamp(44px, 8vw, 92px);
+  line-height: .95;
+  max-width: 900px;
+}
+
+.welcome-card h1 span { color: var(--accent); }
+
+.group-label {
+  margin: 12px 0 8px;
+  color: var(--accent-strong);
+  font-weight: 900;
+  font-size: clamp(22px, 3vw, 34px);
+}
+
+.intro {
+  max-width: 680px;
+  color: var(--muted);
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.6;
+}
+
+.primary-btn,
+.ghost-btn,
+.ui-btn,
+.pill-btn,
+.round-btn {
+  border: 1px solid var(--border);
+  color: white;
+  cursor: pointer;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.primary-btn {
+  margin-top: 26px;
+  padding: 15px 26px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #07111f;
+  font-weight: 900;
+  border-color: transparent;
+}
+
+.primary-btn:hover { transform: translateY(-2px); }
+
+.welcome-foot {
+  margin-top: 38px;
+  color: #7290a8;
+  font-size: 13px;
+}
+
+.screen {
+  background:
+    radial-gradient(circle at 10% 0%, var(--accent-soft), transparent 30%),
+    linear-gradient(180deg, #09182a 0%, #07111f 100%);
+}
+
+.menu-header {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 38px 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+}
+
+.menu-header h2 {
+  margin: 5px 0 4px;
+  font-size: clamp(32px, 5vw, 56px);
+}
+
+.menu-header p { margin: 0; color: var(--muted); }
+
+.ghost-btn,
+.ui-btn,
+.pill-btn {
+  background: rgba(4,12,22,.75);
+  backdrop-filter: blur(10px);
+}
+
+.ghost-btn {
+  padding: 12px 18px;
+  border-radius: 14px;
+}
+
+.gallery {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+  padding: 18px 0 56px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  min-height: 225px;
+  padding: 0;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform .18s ease, border-color .18s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  outline: none;
+}
+
+.card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(3,8,15,.02) 25%, rgba(3,8,15,.93) 100%);
+}
+
+.card-content {
+  position: absolute;
+  z-index: 2;
+  left: 17px;
+  right: 17px;
+  bottom: 16px;
+  text-align: left;
+}
+
+.card-number {
+  color: var(--accent-strong);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+
+.card-title {
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.card-desc {
+  margin-top: 5px;
+  color: #bed0dd;
+  font-size: 13px;
+}
+
+.footer {
+  padding: 0 20px 34px;
+  text-align: center;
+  color: #728ba1;
+  font-size: 13px;
+}
+
+/* FIX V2.1:
+   El visor nunca usa display:none. Así A-Frame/WebGL se inicializa con
+   dimensiones reales y no queda con canvas 0x0. */
+.viewer-screen {
+  position: fixed;
+  inset: 0;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  background: #000;
+  z-index: 20;
+}
+
+.viewer-screen.visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#vrScene {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.topbar {
+  position: absolute;
+  z-index: 100;
+  top: max(14px, env(safe-area-inset-top));
+  left: 14px;
+  right: 14px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.topbar > * { pointer-events: auto; }
+
+.ui-btn {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 14px;
+  font-weight: 800;
+}
+
+#backBtn { justify-self: start; }
+#fullscreenBtn { justify-self: end; }
+
+.scene-info {
+  min-width: 220px;
+  padding: 9px 18px;
+  text-align: center;
+  border-radius: 16px;
+  background: rgba(4,12,22,.72);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(10px);
+}
+
+.counter {
+  display: block;
+  color: var(--accent-strong);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.scene-info strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+.institution-small {
+  display: block;
+  margin-top: 2px;
+  color: #9fb4c5;
+  font-size: 11px;
+}
+
+.info-card {
+  position: absolute;
+  z-index: 95;
+  left: 20px;
+  bottom: 108px;
+  width: min(340px, calc(100% - 40px));
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(4,12,22,.75);
+  border: 1px solid rgba(255,255,255,.13);
+  backdrop-filter: blur(10px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.info-card.hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.info-kicker {
+  color: var(--accent-strong);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .13em;
+}
+
+.info-title {
+  margin-top: 4px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.info-description {
+  margin-top: 5px;
+  color: #c3d2de;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.bottom-controls {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  pointer-events: none;
+}
+
+.round-btn,
+.pill-btn { pointer-events: auto; }
+
+.round-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  font-size: 28px;
+  background: rgba(4,12,22,.8);
+}
+
+.pill-btn {
+  min-height: 50px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #04090f;
+  color: #d5e6f2;
+  font-weight: 800;
+}
+
+.loading.visible { display: flex; }
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255,255,255,.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ghost-btn:hover,
+.ui-btn:hover,
+.pill-btn:hover,
+.round-btn:hover {
+  border-color: var(--accent);
+  background: rgba(18,40,62,.9);
+}
+
+.a-enter-vr {
+  bottom: 92px !important;
+  right: 18px !important;
+}
+
+@media (max-width: 720px) {
+  .menu-header { align-items: start; }
+  .topbar { grid-template-columns: auto 1fr auto; }
+  .scene-info { min-width: 0; padding: 8px 10px; }
+  .scene-info strong { font-size: 14px; }
+
+  .ui-btn {
+    width: 46px;
+    padding: 0;
+    font-size: 0;
+  }
+
+  #backBtn::after { content: "←"; font-size: 24px; }
+  #fullscreenBtn::after { content: "⛶"; font-size: 24px; }
+  .info-card { bottom: 96px; }
+}
